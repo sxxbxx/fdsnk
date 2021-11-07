@@ -94,6 +94,12 @@ public class BodyActivity extends AppCompatActivity {
             }
         });
         bt_update=findViewById(R.id.bt_update);
+        tv_height.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "hello", Toast.LENGTH_SHORT).show();
+            }
+        });
         bt_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,20 +130,21 @@ public class BodyActivity extends AppCompatActivity {
 
     private void loadRecentdb() {
         bodyitems = dbHelper_body.selectBody();
-        Bodyitem item = new Bodyitem();
-        if ((tv_height.getText()).equals("CM")){
-            tv_height.setText(String.valueOf(bodyitems.get(0).getHeight()));
-        }
-        if ((tv_weight.getText()).equals("KG")){
-            tv_weight.setText(String.valueOf(bodyitems.get(0).getWeight()));
-        }
-        if ((tv_muscle.getText()).equals("KG")){
-            tv_muscle.setText(String.valueOf(bodyitems.get(0).getMuscle()));
-        }
-        if ((tv_fat.getText()).equals("KG")) {
-            tv_fat.setText(String.valueOf(bodyitems.get(0).getFat()));
-        }
 
+        if((bodyitems.get(0).getID()).equals(LoginActivity.UserID)) {
+            if ((tv_height.getText()).equals("CM")) {
+                tv_height.setText(String.valueOf(bodyitems.get(0).getHeight()));
+            }
+            if ((tv_weight.getText()).equals("KG")) {
+                tv_weight.setText(String.valueOf(bodyitems.get(0).getWeight()));
+            }
+            if ((tv_muscle.getText()).equals("KG")) {
+                tv_muscle.setText(String.valueOf(bodyitems.get(0).getMuscle()));
+            }
+            if ((tv_fat.getText()).equals("KG")) {
+                tv_fat.setText(String.valueOf(bodyitems.get(0).getFat()));
+            }
+        }
     }
 
 
