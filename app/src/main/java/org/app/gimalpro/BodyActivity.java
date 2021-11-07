@@ -63,15 +63,15 @@ public class BodyActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         //오류나면 여기다 0000으로 insert문 만들기
 
-                        //db delete
-                        dbHelper_body.deleteBody(LoginActivity.UserID);
-                        tv_height.setText("CM");
-                        tv_weight.setText("KG");
-                        tv_muscle.setText("KG");
-                        tv_fat.setText("KG");
+                        if(et_height.length()==0||et_weight.length()==0||et_muscle.length()==0||et_fat.length()==0){
+                            tv_height.setText("CM");
+                            tv_weight.setText("KG");
+                            tv_muscle.setText("KG");
+                            tv_fat.setText("KG");
 
+                        }
 
-
+                        else{
                         //db insert
                         dbHelper_body.insertBody(LoginActivity.UserID,Integer.parseInt(et_height.getText().toString()),Integer.parseInt(et_weight.getText().toString()),Integer.parseInt(et_muscle.getText().toString()),Integer.parseInt(et_fat.getText().toString()));
 
@@ -86,7 +86,7 @@ public class BodyActivity extends AppCompatActivity {
                         tv_muscle.setText(String.valueOf(item.getMuscle()));
                         tv_fat.setText(String.valueOf(item.getFat()));
                         dialog.dismiss();
-                        Toast.makeText(getApplicationContext(), "할 일 목록이 추가되었습니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "할 일 목록이 추가되었습니다.", Toast.LENGTH_SHORT).show();}
 
                     }
                 });
@@ -94,10 +94,17 @@ public class BodyActivity extends AppCompatActivity {
             }
         });
         bt_update=findViewById(R.id.bt_update);
-        tv_height.setOnClickListener(new View.OnClickListener() {
+        tv_height.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "hello", Toast.LENGTH_SHORT).show();
+            public boolean onLongClick(View v) {
+                //db delete
+                dbHelper_body.deleteBody(LoginActivity.UserID);
+                tv_height.setText("CM");
+                tv_weight.setText("KG");
+                tv_muscle.setText("KG");
+                tv_fat.setText("KG");
+
+                return true;
             }
         });
         bt_update.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +138,7 @@ public class BodyActivity extends AppCompatActivity {
     private void loadRecentdb() {
         bodyitems = dbHelper_body.selectBody();
 
-        if((bodyitems.get(0).getID()).equals(LoginActivity.UserID)) {
+        if(!bodyitems.isEmpty()) {
             if ((tv_height.getText()).equals("CM")) {
                 tv_height.setText(String.valueOf(bodyitems.get(0).getHeight()));
             }
@@ -144,6 +151,12 @@ public class BodyActivity extends AppCompatActivity {
             if ((tv_fat.getText()).equals("KG")) {
                 tv_fat.setText(String.valueOf(bodyitems.get(0).getFat()));
             }
+        }
+        else{
+            tv_height.setText("CM");
+            tv_weight.setText("KG");
+            tv_muscle.setText("KG");
+            tv_fat.setText("KG");
         }
     }
 
