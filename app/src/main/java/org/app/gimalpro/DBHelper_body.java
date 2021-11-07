@@ -64,9 +64,9 @@ public class DBHelper_body extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("INSERT INTO Body(ID ,Height, Weight, Muscle,Fat) VALUES ('"+_ID+"','"+_Height+"', '"+ _Weight+"','"+_Muscle+"','"+_Fat+"');");
     }
-    public void updateBody(String _ID,int _Height, int _Weight ,int _Muscle,  int _Fat){
+    public void updateBody(String _ID,int _Height, int _Weight ,int _Muscle,  int _Fat,int _NUMBER){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE Body SET Height = '"+_Height+"',Weight='"+_Weight+"',Muscle = '"+_Muscle+"',Fat= '"+_Fat+"' WHERE ID='"+_ID+"'");
+        db.execSQL("UPDATE Body SET Height ='"+_Height+"',Weight='"+_Weight+"',Muscle ='"+_Muscle+"',Fat='"+_Fat+"' WHERE ID='"+_ID+"' AND NUMBER ='"+_NUMBER+"'");
     }
     public void deleteBody(String _ID){
         SQLiteDatabase db = getWritableDatabase();

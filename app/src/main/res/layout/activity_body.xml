@@ -104,7 +104,7 @@
         android:id="@+id/bt_update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="신체정보 새로 입력하기"
+        android:text="신체정보 수정"
         android:textSize="25dp"
         />
 

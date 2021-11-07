@@ -2,7 +2,6 @@ package org.app.gimalpro;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
@@ -11,11 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class BodyActivity extends AppCompatActivity {
     private Bodyitem bodyitem;
@@ -49,7 +44,7 @@ public class BodyActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Dialog dialog = new Dialog(BodyActivity.this, android.R.style.Theme_Material_Light_Dialog);
-                dialog.setContentView(R.layout.dialog_body);
+                dialog.setContentView(R.layout.dialog_body_insert);
                 EditText et_height = dialog.findViewById(R.id.et_height);
                 EditText et_weight = dialog.findViewById(R.id.et_weight);
                 EditText et_muscle = dialog.findViewById(R.id.et_muscle);
@@ -86,7 +81,7 @@ public class BodyActivity extends AppCompatActivity {
                         tv_muscle.setText(String.valueOf(item.getMuscle()));
                         tv_fat.setText(String.valueOf(item.getFat()));
                         dialog.dismiss();
-                        Toast.makeText(getApplicationContext(), "할 일 목록이 추가되었습니다.", Toast.LENGTH_SHORT).show();}
+                        Toast.makeText(getApplicationContext(), "새로운 신체정보가 추가되었습니다.", Toast.LENGTH_SHORT).show();}
 
                     }
                 });
@@ -110,24 +105,50 @@ public class BodyActivity extends AppCompatActivity {
         bt_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                bodyitems = dbHelper_body.selectBody();
                 Dialog dialog = new Dialog(BodyActivity.this, android.R.style.Theme_Material_Light_Dialog);
-                dialog.setContentView(R.layout.dialog_body);
-                EditText et_height = dialog.findViewById(R.id.et_height);
-                EditText et_weight = dialog.findViewById(R.id.et_weight);
-                EditText et_muscle = dialog.findViewById(R.id.et_muscle);
-                EditText et_fat = dialog.findViewById(R.id.et_fat);
-                //update
-                dbHelper_body.updateBody(LoginActivity.UserID,Integer.parseInt(et_height.getText().toString()),Integer.parseInt(et_weight.getText().toString()),Integer.parseInt(et_muscle.getText().toString()),Integer.parseInt(et_fat.getText().toString()));
+                dialog.setContentView(R.layout.dialog_body_update);
+                Button button =dialog.findViewById(R.id.bt_okbodyup);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-                Bodyitem item = new Bodyitem();
-                item.setHeight(Integer.parseInt(et_height.getText().toString()));
-                item.setWeight(Integer.parseInt(et_weight.getText().toString()));
-                item.setMuscle(Integer.parseInt(et_muscle.getText().toString()));
-                tv_height.setText(String.valueOf(item.getHeight()));
-                tv_weight.setText(String.valueOf(item.getWeight()));
-                tv_muscle.setText(String.valueOf(item.getMuscle()));
-                tv_fat.setText(String.valueOf(item.getFat()));
+                        EditText et_height = dialog.findViewById(R.id.et_height);
+                        EditText et_weight = dialog.findViewById(R.id.et_weight);
+                        EditText et_muscle = dialog.findViewById(R.id.et_muscle);
+                        EditText et_fat = dialog.findViewById(R.id.et_fat);
+                        int height=Integer.parseInt(et_height.getText().toString());
+                        int weight=Integer.parseInt(et_weight.getText().toString());
+                        int muscle=Integer.parseInt(et_muscle.getText().toString());
+                        int fat=Integer.parseInt(et_fat.getText().toString());
+
+                        //update
+                        if(!bodyitems.isEmpty()){
+                        dbHelper_body.updateBody(LoginActivity.UserID,height,weight,muscle,fat, bodyitems.get(0).getNUMBER());
+                        Bodyitem item = new Bodyitem();
+                        item.setHeight(Integer.parseInt(et_height.getText().toString()));
+                        item.setWeight(Integer.parseInt(et_weight.getText().toString()));
+                        item.setMuscle(Integer.parseInt(et_muscle.getText().toString()));
+                        item.setFat(Integer.parseInt(et_fat.getText().toString()));
+                        tv_height.setText(String.valueOf(item.getHeight()));
+                        tv_weight.setText(String.valueOf(item.getWeight()));
+                        tv_muscle.setText(String.valueOf(item.getMuscle()));
+                        tv_fat.setText(String.valueOf(item.getFat()));
+                        dialog.dismiss();
+                        Toast.makeText(getApplicationContext(), "신체정보가 업데이트 되었습니다.", Toast.LENGTH_SHORT).show();}
+
+                        else {
+                            dialog.dismiss();
+                            Toast.makeText(getApplicationContext(), "신체정보를 먼저 추가하세요!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                dialog.show();
+
+
+
             }
+
         });
 
 
