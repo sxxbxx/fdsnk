@@ -86,9 +86,12 @@ public class BodyActivity extends AppCompatActivity {
                     }
                 });
                 dialog.show();
+
             }
         });
-        bt_update=findViewById(R.id.bt_update);
+
+
+
         tv_height.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -102,6 +105,9 @@ public class BodyActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        //update
+        bt_update=findViewById(R.id.bt_update);
         bt_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

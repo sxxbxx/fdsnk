@@ -54,7 +54,6 @@ public class DBHelper_body extends SQLiteOpenHelper {
             }
     }
         cursor.close();
-        db.close();
         return bodyitems;
     }
 
