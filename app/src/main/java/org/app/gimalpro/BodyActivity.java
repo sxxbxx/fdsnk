@@ -108,20 +108,27 @@ public class BodyActivity extends AppCompatActivity {
                 bodyitems = dbHelper_body.selectBody();
                 Dialog dialog = new Dialog(BodyActivity.this, android.R.style.Theme_Material_Light_Dialog);
                 dialog.setContentView(R.layout.dialog_body_update);
+                EditText et_height = dialog.findViewById(R.id.et_height);
+                EditText et_weight = dialog.findViewById(R.id.et_weight);
+                EditText et_muscle = dialog.findViewById(R.id.et_muscle);
+                EditText et_fat = dialog.findViewById(R.id.et_fat);
                 Button button =dialog.findViewById(R.id.bt_okbodyup);
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if(et_height.length()==0||et_weight.length()==0||et_muscle.length()==0||et_fat.length()==0){
+                            tv_height.setText("CM");
+                            tv_weight.setText("KG");
+                            tv_muscle.setText("KG");
+                            tv_fat.setText("KG");
+                            Toast.makeText(getApplicationContext(), "값을 입력하세요", Toast.LENGTH_SHORT).show();
 
-                        EditText et_height = dialog.findViewById(R.id.et_height);
-                        EditText et_weight = dialog.findViewById(R.id.et_weight);
-                        EditText et_muscle = dialog.findViewById(R.id.et_muscle);
-                        EditText et_fat = dialog.findViewById(R.id.et_fat);
-                        int height=Integer.parseInt(et_height.getText().toString());
-                        int weight=Integer.parseInt(et_weight.getText().toString());
-                        int muscle=Integer.parseInt(et_muscle.getText().toString());
-                        int fat=Integer.parseInt(et_fat.getText().toString());
-
+                        }
+                        else{
+                            int height=Integer.parseInt(et_height.getText().toString());
+                            int weight=Integer.parseInt(et_weight.getText().toString());
+                            int muscle=Integer.parseInt(et_muscle.getText().toString());
+                            int fat=Integer.parseInt(et_fat.getText().toString());
                         //update
                         if(!bodyitems.isEmpty()){
                         dbHelper_body.updateBody(LoginActivity.UserID,height,weight,muscle,fat, bodyitems.get(0).getNUMBER());
@@ -140,7 +147,7 @@ public class BodyActivity extends AppCompatActivity {
                         else {
                             dialog.dismiss();
                             Toast.makeText(getApplicationContext(), "신체정보를 먼저 추가하세요!", Toast.LENGTH_SHORT).show();
-                        }
+                        }}
                     }
                 });
                 dialog.show();
@@ -161,16 +168,16 @@ public class BodyActivity extends AppCompatActivity {
 
         if(!bodyitems.isEmpty()) {
             if ((tv_height.getText()).equals("CM")) {
-                tv_height.setText(String.valueOf(bodyitems.get(0).getHeight()));
+                tv_height.setText(String.valueOf(bodyitems.get(bodyitems.size()-1).getHeight()));
             }
             if ((tv_weight.getText()).equals("KG")) {
-                tv_weight.setText(String.valueOf(bodyitems.get(0).getWeight()));
+                tv_weight.setText(String.valueOf(bodyitems.get(bodyitems.size()-1).getWeight()));
             }
             if ((tv_muscle.getText()).equals("KG")) {
-                tv_muscle.setText(String.valueOf(bodyitems.get(0).getMuscle()));
+                tv_muscle.setText(String.valueOf(bodyitems.get(bodyitems.size()-1).getMuscle()));
             }
             if ((tv_fat.getText()).equals("KG")) {
-                tv_fat.setText(String.valueOf(bodyitems.get(0).getFat()));
+                tv_fat.setText(String.valueOf(bodyitems.get(bodyitems.size()-1).getFat()));
             }
         }
         else{
