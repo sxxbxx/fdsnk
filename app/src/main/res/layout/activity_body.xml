@@ -97,7 +97,7 @@
         android:id="@+id/bt_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="초기화 후 입력"
+        android:text="신체정보 추가"
         android:textSize="25dp"
         />
     <Button
