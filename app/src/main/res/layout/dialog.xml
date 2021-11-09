@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="게시글 제목"
+            android:text="운동종류"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,7 +32,7 @@
             android:layout_width="77dp"
             android:layout_height="17dp"
             android:layout_marginTop="16dp"
-            android:text="게시글 내용"
+            android:text="시간,추가 내용"
             app:layout_constraintStart_toStartOf="@+id/et_title"
             app:layout_constraintTop_toBottomOf="@+id/et_title" />
 
