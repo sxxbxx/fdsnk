@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +22,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     EditText et_id,et_pass,et_name,et_age;
     Button bt_register1;
+    RadioGroup rg_gender;
 
 
 
@@ -34,6 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
         et_name=findViewById(R.id.et_name);
         et_age=findViewById(R.id.et_age);
         bt_register1=findViewById(R.id.bt_register1);
+        rg_gender=findViewById(R.id.rg_gender);
 
         //회원가입 버튼 클릭시 실행
         bt_register1.setOnClickListener(new View.OnClickListener() {
@@ -43,6 +47,9 @@ public class RegisterActivity extends AppCompatActivity {
             String userPass=et_pass.getText().toString();
             String userName=et_name.getText().toString();
             int userAge=Integer.parseInt(et_age.getText().toString());
+            int gender_id=rg_gender.getCheckedRadioButtonId();
+                RadioButton rb = findViewById(gender_id);
+                String gender=rb.getText().toString();
 
 
 
@@ -70,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 };
                 //서버로 volley를 이용해 요청
-                RegisterRequest registerRequest = new RegisterRequest (userID,userPass,userName,userAge,responseListener);
+                RegisterRequest registerRequest = new RegisterRequest (userID,userPass,userName,userAge,gender,responseListener);
                 RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
                 queue.add(registerRequest);
             }

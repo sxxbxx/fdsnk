@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +16,7 @@ import androidx.fragment.app.Fragment;
 public class fragment1 extends Fragment {
     private View view;
     Button bt_inputbody;
+    TextView tv_gender;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -27,6 +29,11 @@ public class fragment1 extends Fragment {
                 startActivity(intent);
             }
         });
+        Intent intent = getActivity().getIntent();
+        String gender = intent.getStringExtra("userGender");
+
+        tv_gender=view.findViewById(R.id.tv_gender);
+        tv_gender.setText(gender);
 
 
 
