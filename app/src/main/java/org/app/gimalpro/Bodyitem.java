@@ -3,13 +3,9 @@ package org.app.gimalpro;
 public class Bodyitem {
     private int NUMBER;
     private String ID;
-    private int Height;
-    private int Weight;
-    private int Muscle;
-    private int Fat;
-
-    public Bodyitem() {
-    }
+    private Double Height;
+    private Double Weight;
+    private Double Muscle;
 
     public int getNUMBER() {
         return NUMBER;
@@ -27,35 +23,42 @@ public class Bodyitem {
         this.ID = ID;
     }
 
-    public int getHeight() {
+    public Double getHeight() {
         return Height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(Double height) {
         Height = height;
     }
 
-    public int getWeight() {
+    public Double getWeight() {
         return Weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(Double weight) {
         Weight = weight;
     }
 
-    public int getMuscle() {
+    public Double getMuscle() {
         return Muscle;
     }
 
-    public void setMuscle(int muscle) {
+    public void setMuscle(Double muscle) {
         Muscle = muscle;
     }
 
-    public int getFat() {
+    public Double getFat() {
         return Fat;
     }
 
-    public void setFat(int fat) {
+    public void setFat(Double fat) {
         Fat = fat;
     }
+
+    private Double Fat;
+
+    public Bodyitem() {
+    }
+
+
 }
