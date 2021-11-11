@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class DBHelper_body extends SQLiteOpenHelper {
     private static final int DB_version =1;
-    private static final String DB_name ="User_body.db";
+    private static final String DB_name ="User_body.db2";
 
 
     public DBHelper_body(@Nullable Context context) {
@@ -20,7 +20,7 @@ public class DBHelper_body extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS Body (NUMBER INTEGER PRIMARY KEY AUTOINCREMENT, ID TEXT NOT NULL, Height REAL NOT NULL, Weight REAL NOT NULL, Muscle REAL NOT NULL, Fat REAL NOT NULL)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS Body (NUMBER INTEGER PRIMARY KEY AUTOINCREMENT, ID TEXT NOT NULL, Height REAL NOT NULL, Weight REAL NOT NULL, Muscle REAL NOT NULL, Fat REAL NOT NULL, Muscle_level INTEGER NOT NULL, Fat_level INTEGER NOT NULL)");
 
     }
 
@@ -42,6 +42,8 @@ public class DBHelper_body extends SQLiteOpenHelper {
                 Double Weight = cursor.getDouble(cursor.getColumnIndexOrThrow("Weight"));
                 Double Muscle = cursor.getDouble(cursor.getColumnIndexOrThrow("Muscle"));
                 Double Fat = cursor.getDouble(cursor.getColumnIndexOrThrow("Fat"));
+                int Muscle_level= cursor.getInt(cursor.getColumnIndexOrThrow("Muscle_level"));
+                int Fat_level= cursor.getInt(cursor.getColumnIndexOrThrow("Fat_level"));
 
                 Bodyitem bodyitem = new Bodyitem();
                 bodyitem.setNUMBER(NUMBER);
@@ -50,6 +52,8 @@ public class DBHelper_body extends SQLiteOpenHelper {
                 bodyitem.setWeight(Weight);
                 bodyitem.setMuscle(Muscle);
                 bodyitem.setFat(Fat);
+                bodyitem.setMuscle_level(Muscle_level);
+                bodyitem.setFat_level(Fat_level);
                 bodyitems.add(bodyitem);
             }
     }
@@ -59,13 +63,13 @@ public class DBHelper_body extends SQLiteOpenHelper {
 
 
 
-    public void insertBody(String _ID,double _Height,double _Weight, double _Muscle, double _Fat){
+    public void insertBody(String _ID,double _Height,double _Weight, double _Muscle, double _Fat,int _Muscle_level, int _Fat_level){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("INSERT INTO Body(ID ,Height, Weight, Muscle,Fat) VALUES ('"+_ID+"','"+_Height+"', '"+ _Weight+"','"+_Muscle+"','"+_Fat+"');");
+        db.execSQL("INSERT INTO Body(ID ,Height, Weight, Muscle,Fat,Muscle_level,Fat_level) VALUES ('"+_ID+"','"+_Height+"', '"+ _Weight+"','"+_Muscle+"','"+_Fat+"','"+_Muscle_level+"','"+_Fat_level+"');");
     }
-    public void updateBody(String _ID,double _Height, double _Weight ,double _Muscle,  double _Fat,double _NUMBER){
+    public void updateBody(String _ID,double _Height, double _Weight ,double _Muscle,  double _Fat,double _NUMBER,int _Muscle_level, int _Fat_level ){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE Body SET Height ='"+_Height+"',Weight='"+_Weight+"',Muscle ='"+_Muscle+"',Fat='"+_Fat+"' WHERE ID='"+_ID+"' AND NUMBER ='"+_NUMBER+"'");
+        db.execSQL("UPDATE Body SET Height ='"+_Height+"',Weight='"+_Weight+"',Muscle ='"+_Muscle+"',Fat='"+_Fat+"',Muscle_level='"+_Muscle_level+"',Fat_level='"+_Fat_level+"' WHERE ID='"+_ID+"' AND NUMBER ='"+_NUMBER+"'");
     }
     public void deleteBody(String _ID,int _NUMBER){
         SQLiteDatabase db = getWritableDatabase();

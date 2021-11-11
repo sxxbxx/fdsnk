@@ -6,6 +6,24 @@ public class Bodyitem {
     private Double Height;
     private Double Weight;
     private Double Muscle;
+    private int Muscle_level;
+    private int Fat_level;
+
+    public int getMuscle_level() {
+        return Muscle_level;
+    }
+
+    public void setMuscle_level(int muscle_level) {
+        Muscle_level = muscle_level;
+    }
+
+    public int getFat_level() {
+        return Fat_level;
+    }
+
+    public void setFat_level(int fat_level) {
+        Fat_level = fat_level;
+    }
 
     public int getNUMBER() {
         return NUMBER;

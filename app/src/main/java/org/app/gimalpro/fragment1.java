@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,18 +23,29 @@ public class fragment1 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment1,container,false);
         bt_inputbody=view.findViewById(R.id.bt_inputbody);
+
+        Intent intent = getActivity().getIntent();
+        String userGender = intent.getStringExtra("userGender");
+
+        tv_gender=view.findViewById(R.id.tv_gender);
+        tv_gender.setText(userGender);
+
         bt_inputbody.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),BodyActivity.class);
+                intent.putExtra("userGender",userGender);
                 startActivity(intent);
+
+
+
             }
         });
-        Intent intent = getActivity().getIntent();
-        String gender = intent.getStringExtra("userGender");
 
-        tv_gender=view.findViewById(R.id.tv_gender);
-        tv_gender.setText(gender);
+
+
+
+
 
 
 
