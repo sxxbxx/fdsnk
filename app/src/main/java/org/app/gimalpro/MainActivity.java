@@ -1,5 +1,9 @@
 package org.app.gimalpro;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -29,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private fragment5 frag5;
     private DBHelper_body dbHelper_body;
     private ArrayList<Bodyitem> bodyitems;
+    private ActivityResultLauncher<Intent> resultLauncher;
 
 
     @Override
@@ -69,6 +74,9 @@ public class MainActivity extends AppCompatActivity {
         frag5 = new fragment5();
         setFrag(0); //첫화면 지정 선택함수
 
+        Intent intent = getIntent();
+        moveFragement(intent.getStringExtra("f2"));
+
     }
 
     private void setFrag(int n){
@@ -97,4 +105,19 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
+    //지정 프래그먼트로 이동
+    public void moveFragement(String code){
+        try {
+            if(code.equals("f2")){
+                setFrag(1);
+                bottomNavigationView.setSelectedItemId(R.id.a_ar);
+            }
+        } catch (NullPointerException e){
+            setFrag(0);
+        }
+
+
+    }
+
 }
+

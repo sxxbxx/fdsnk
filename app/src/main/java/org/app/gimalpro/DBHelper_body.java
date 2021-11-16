@@ -29,6 +29,8 @@ public class DBHelper_body extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+
+
     public ArrayList<Bodyitem> selectBody(){
         ArrayList<Bodyitem> bodyitems = new ArrayList<>();
         SQLiteDatabase db=getReadableDatabase();

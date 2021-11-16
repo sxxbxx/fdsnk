@@ -24,6 +24,7 @@ public class BodyActivity extends AppCompatActivity {
     TextView tv_fat;
     Button bt_input;
     Button bt_update;
+    Button bt_f2;
 
 
     @Override
@@ -34,12 +35,22 @@ public class BodyActivity extends AppCompatActivity {
         tv_weight=findViewById(R.id.tv_weight);
         tv_muscle=findViewById(R.id.tv_muscle);
         tv_fat=findViewById(R.id.tv_fat);
-
+        bt_f2=findViewById(R.id.bt_f2);
 
         dbHelper_body=new DBHelper_body(this);
 
         loadRecentdb();
 
+
+        //프래그먼트 2로 이동
+        bt_f2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+            intent.putExtra("f2","f2");
+            startActivity(intent);
+            }
+        });
 
         bt_input=findViewById(R.id.bt_input);
         bt_input.setOnClickListener(new View.OnClickListener() {
